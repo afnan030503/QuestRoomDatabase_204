@@ -13,15 +13,4 @@ import com.example.roomdatabase.ui.theme.view.mahasiswa.InsertMhsView
 fun PengelolaHalaman(
     navController: NavController = rememberNavController(),
     modifier: Modifier = Modifier
-){
-    NavHost(navController = navController, startDestination = DestinasiInsert.route) {
-        composable(
-            route = DestinasiInsert.route
-        )
-        {
-            InsertMhsView(
-                onBack = {}, onNavigate = {}
-            )
-        }
-    }
-}
+) {}
