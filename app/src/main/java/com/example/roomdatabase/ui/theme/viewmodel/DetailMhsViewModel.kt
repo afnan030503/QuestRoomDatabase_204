@@ -1,5 +1,6 @@
 package com.example.roomdatabase.ui.theme.viewmodel
 
+import android.text.BoringLayout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.roomdatabase.repository.LocalRepositoryMhs
@@ -10,7 +11,16 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 
 data class DetailUiState(
-)
+    val detailUiEvent: MahasiswaEvent = MahasiswaEvent(),
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+    val errorMessage: String = ""
+) {
+    val isUiEventEmpty: Boolean
+        get() = detailUiEvent == MahasiswaEvent()
+    val isEventNotEmpty: Boolean
+        get() = detailUiEvent != MahasiswaEvent()
+}
 
 class DetailMhsViewModel(
     savedStateHandle: SavedStateHandle,
