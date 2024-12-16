@@ -3,12 +3,19 @@ package com.example.roomdatabase.ui.theme.viewmodel
 import android.text.BoringLayout
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.roomdatabase.data.entity.Mahasiswa
 import com.example.roomdatabase.repository.LocalRepositoryMhs
 import com.example.roomdatabase.repository.RepositoryMhs
 import com.example.roomdatabase.ui.theme.navigation.AlamatNavigasi
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 
 data class DetailUiState(
     val detailUiEvent: MahasiswaEvent = MahasiswaEvent(),
@@ -31,6 +38,41 @@ class DetailMhsViewModel(
     val detailUiState: StateFlow<DetailUiState> = repositoryMhs.getMhs(_nim)
         .filterNotNull()
         .map {
-            DetailUiEvent = it.toDetailEvent
+            DetailUiState(
+                detailUiEvent = it.toDetailUiEvent(),
+                isLoading = false,
+            )
         }
+        .onStart {
+            emit(DetailUiState(isLoading = true))
+            delay(600)
+        }
+        .catch {
+            emit(
+                DetailUiState(
+                    isLoading = false,
+                    isError = true,
+                    errorMessage = it.message ?: "terjadi kesalahan",
+                )
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(2000),
+            initialValue = DetailUiState(
+                isLoading = true,
+            ),
+        )
+
+}
+
+fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent{
+    return MahasiswaEvent (
+        nim = nim,
+        nama = nama,
+        jeniskelamin = jenisKelamin,
+        alamat = alamat,
+        kelas = kelas,
+        angkatan = angkatan
+    )
 }
