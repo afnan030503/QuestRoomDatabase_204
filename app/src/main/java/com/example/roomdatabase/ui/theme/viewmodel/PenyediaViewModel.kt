@@ -1,10 +1,13 @@
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.createSavedStateHandle
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.roomdatabase.KrsApp
 import com.example.roomdatabase.ui.theme.viewmodel.DetailMhsViewModel
 import com.example.roomdatabase.ui.theme.viewmodel.HomeMhsViewModel
 import com.example.roomdatabase.ui.theme.viewmodel.MahasiswaViewModel
+import com.example.roomdatabase.ui.theme.viewmodel.UpdateMhsViewModel
 
 object PenyediaViewModel{
     val Factory = viewModelFactory {
@@ -27,7 +30,7 @@ object PenyediaViewModel{
         initializer {
             UpdateMhsViewModel(
                 createSavedStateHandle(),
-                krsApp().containerApp.repositoryMhs
+                krsApp().containerApp.repositoryMhs,
             )
         }
     }

@@ -36,6 +36,9 @@ import com.example.roomdatabase.ui.theme.viewmodel.MhsUIState
 import com.example.roomdatabase.ui.theme.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
+object DestinasiInsert : AlamatNavigasi{
+    override val route : String = "Insert_mhs"
+}
 
 @Composable
 fun InsertBodyMhs(

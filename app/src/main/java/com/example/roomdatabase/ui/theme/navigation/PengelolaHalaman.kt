@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import androidx.room.Update
+import com.example.roomdatabase.ui.theme.navigation.AlamatNavigasi
+import com.example.roomdatabase.ui.theme.view.mahasiswa.DestinasiInsert
 import com.example.roomsiswa.ui.view.mahasiswa.DestinasiInsert
 import com.example.roomsiswa.ui.view.mahasiswa.DetailMhsView
 import com.example.roomsiswa.ui.view.mahasiswa.HomeMhsView
@@ -19,7 +21,6 @@ fun PengelolaHalaman(
     modifier: Modifier = Modifier
 ){
     NavHost(navController = navController, startDestination = DestinasiInsert.route) {
-        NavHost(navController = navController, startDestination = DestinasiHome.route) {
             composable(
                 route = DestinasiHome.route
             )

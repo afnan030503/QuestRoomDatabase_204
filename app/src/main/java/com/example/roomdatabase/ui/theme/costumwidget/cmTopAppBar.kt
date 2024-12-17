@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun cmTopAppBar(
+    modifier: Modifier = Modifier,
     onBack: () -> Unit,
     showBackButton: Boolean = true,
     judul: String,

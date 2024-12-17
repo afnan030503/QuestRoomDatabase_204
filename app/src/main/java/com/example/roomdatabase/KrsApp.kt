@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.roomdatabase.dependeciesinjection.ContainerApp
 import com.example.roomdatabase.dependeciesinjection.InterfaceContainerApp
 
-class krsApp : Application() {
+class KrsApp : Application() {
     lateinit var containerApp: ContainerApp//fungsinya untuk menyimpan
 
     override fun onCreate() {
